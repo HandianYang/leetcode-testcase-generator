@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leetcode Testcase Generator</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .tabs {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .tab {
+    margin-right: 10px;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+  }
+
+  .tab.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .inline {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .specify-input {
+    display: none;
+    margin-left: 10px;
+  }
+
+  .container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  </style>
+  
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<h1>Leetcode Testcase Generator</h1>
+
+<ul class="tabs">
+  <li class="tab active" onclick="showTab('numerical-array-tab')">Numerical array</li>
+  <li class="tab" onclick="showTab('monotonic-numerical-array-tab')">Monotonic numerical array</li>
+  <li class="tab" onclick="showTab('string-tab')">String</li>
+</ul>
+    
+<div id="numerical-array-tab" class="tab-content active">
+  <h2>Numerical array</h2>
+  <p>
+    Generate a randomized numerical array in integer type. 
+    Each element in the array is randomly selected from a given numerical range.
+  </p>
+  <form id="numerical-array-form">
+    <label for="numerical-array-lower-bound">Enter the lower bound:</label><br>
+    <input type="number" id="numerical-array-lower-bound"
+           name="numerical-array-lower-bound" value="0" required><br><br>
+    <label for="numerical-array-upper-bound">Enter the upper bound:</label><br>
+    <input type="number" id="numerical-array-upper-bound"
+           name="numerical-array-upper-bound" value="10" required><br><br>
+    <label for="numerical-array-length">Enter the length of the array:</label><br>
+    <input type="number" id="numerical-array-length" 
+           name="numerical-array-length" value="10" required><br><br>
+
+    <button type="button" onclick="generateNumericalArray()">Generate</button>
+  </form>
+</div>
+
+<div id="monotonic-numerical-array-tab" class="tab-content">
+  <h2>Monotonic numerical array</h2>
+  <p>
+    Generate a randomized numerical array in integer type, with elements
+    listed in increasing/decreasing order. Each element in the array is
+    randomly selected from a given numerical range.
+  </p>
+  <form id="monotonic-numerical-array-form">
+    <label for="monotonic-numerical-array-lower-bound">Enter the lower bound:</label><br>
+    <input type="number" id="monotonic-numerical-array-lower-bound"
+           name="monotonic-numerical-array-lower-bound" value="0" required><br><br>
+    <label for="monotonic-numerical-array-upper-bound">Enter the upper bound:</label><br>
+    <input type="number" id="monotonic-numerical-array-upper-bound"
+           name="monotonic-numerical-array-upper-bound" value="10" required><br><br>
+    <label for="monotonic-numerical-array-length">Enter the length of the array:</label><br>
+    <input type="number" id="monotonic-numerical-array-length"
+           name="monotonic-numerical-array-length" value="10" required><br><br>
+    <label for="monotonic-numerical-array-type">Select the monotonic type of the array:</label><br>
+    <select id="monotonic-numerical-array-type" name="monotonic-numerical-array-type">
+      <option value="monotonic-numerical-array-type-non-decreasing">non-decreasing</option>
+      <option value="monotonic-numerical-array-type-non-increasing">non-increasing</option>
+      <option value="monotonic-numerical-array-type-strictly-increasing">strictly increasing</option>
+      <option value="monotonic-numerical-array-type-strictly-decreasing">strictly decreasing</option>
+    </select>
+
+    <br><br>
+    <button type="button" onclick="generateMonotonicNumericalArray()">Generate</button>
+  </form>
+</div>
+
+<div id="string-tab" class="tab-content">
+  <h2>String</h2>
+  <p>
+    Generate a string of randomized characters. Each character is randomly
+    selected from the given range and type, such as uppercase and lowercase
+    letters, numbers, and other common symbols.
+  </p>
+  <form id="string-form">
+    <label for="string-length">Enter the length of the string:</label><br>
+    <input type="number" id="string-length" name="string-length" value="10" required><br>
+
+    <p>The string may contain:</p>
+
+    <label class="inline">
+      <input type="checkbox" id="string-uppercase" name="string-uppercase"> uppercase letters
+      <input type="text" id="string-uppercase-input" class="inline specify-input"
+           name="string-uppercase-input" placeholder="A-Z">
+    </label><br><br>
+
+    <label class="inline">
+      <input type="checkbox" id="string-lowercase" name="string-lowercase"> lowercase letters
+      <input type="text" id="string-lowercase-input" class="inline specify-input"
+           name="string-lowercase-input" placeholder="a-z">
+    </label><br><br>
+
+    <label class="inline">
+      <input type="checkbox" id="string-number" name="string-number"> numbers
+      <input type="text" id="string-number-input" class="inline specify-input"
+           name="string-number-input" placeholder="0-9">
+    </label><br><br>
+
+    <label class="inline">
+      <input type="checkbox" id="string-symbol" name="string-symbol"> other symbols
+      <input type="text" id="string-symbol-input" class="inline specify-input"
+             name="string-symbol-input" placeholder="Please specify...">
+    </label>
+    
+    <br><br>
+    <button type="button" onclick="generateRandomString()">Generate</button>
+  </form>
+</div>
+
+<div id="output" class="container"></div>
+
+<button onclick="copyOutput()" id="copyButton" style="display: none;">Copy</button>
+
+<h5>Author: Handian Yang</h5>
+<h5>Email: ych0610765@gmail.com</h5>
+
+<script>
+
+/**
+ * @brief Change the style of the active and inactive tabs.
+ */
+function showTab(tabId) {
+  // Hide all tab contents
+  var tabContents = document.querySelectorAll('.tab-content');
+  tabContents.forEach(function(tabContent) {
+    tabContent.classList.remove('active');
+  });
+
+  // Deactivate all tabs
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(tab) {
+    tab.classList.remove('active');
+  });
+
+  // Activate the selected tab
+  document.getElementById(tabId).classList.add('active');
+  document.querySelector('[onclick="showTab(\'' + tabId + '\')"]').classList.add('active');
+}
+
+/**
+ * @brief Copy data to the clipboard.
+ */
+ function copyOutput() {
+  var outputText = document.getElementById("copyButton").getAttribute("output-text");
+  navigator.clipboard.writeText(outputText).then(function() {
+    alert("Output text copied to clipboard!");
+  }, function() {
+    alert("Unable to copy output text to clipboard.");
+  });
+}
+
+/**
+ * @brief Add event listeners to each checkbox in the `String` tab.
+ */
+
+// Add event listener for the uppercase checkbox
+const stringUppercaseCheckbox = document.getElementById('string-uppercase');
+const stringUppercaseInput = document.getElementById('string-uppercase-input');
+stringUppercaseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    stringUppercaseInput.style.display = 'inline-block';
+  } else {
+    stringUppercaseInput.style.display = 'none';
+    stringUppercaseInput.value = ''; // Clear the input if unchecked
+  }
+});
+
+// Add event listener for the lowercase checkbox
+const stringLowercaseCheckbox = document.getElementById('string-lowercase');
+const stringLowercaseInput = document.getElementById('string-lowercase-input');
+stringLowercaseCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    stringLowercaseInput.style.display = 'inline-block';
+  } else {
+    stringLowercaseInput.style.display = 'none';
+    stringLowercaseInput.value = ''; // Clear the input if unchecked
+  }
+});
+
+// Add event listener for the number checkbox
+const stringNumberCheckbox = document.getElementById('string-number');
+const stringNumberInput = document.getElementById('string-number-input');
+stringNumberCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    stringNumberInput.style.display = 'inline-block';
+  } else {
+    stringNumberInput.style.display = 'none';
+    stringNumberInput.value = ''; // Clear the input if unchecked
+  }
+});
+
+// Add event listener for the symbol checkbox
+const stringSymbolCheckbox = document.getElementById('string-symbol');
+const stringSymbolInput = document.getElementById('string-symbol-input');
+stringSymbolCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+    stringSymbolInput.style.display = 'inline-block';
+  } else {
+    stringSymbolInput.style.display = 'none';
+    stringSymbolInput.value = ''; // Clear the input if unchecked
+  }
+});
+
+/**
+ * @brief Generate a randomized numerical array in integer type. Each element
+ *        in the array is randomly selected from a given numerical range.
+ * @param lowerBound {number} the lower bound of the range
+ * @param upperBound {number} the upper bound of the range
+ * @param length {number} the length of the output array
+ */
+function generateNumericalArray() {
+  var lowerBound = parseInt(document.getElementById("numerical-array-lower-bound").value);
+  var upperBound = parseInt(document.getElementById("numerical-array-upper-bound").value);
+  var length = parseInt(document.getElementById("numerical-array-length").value);
+  
+  // Exception: Nan inputs
+  if (isNaN(lowerBound) || isNaN(upperBound) || isNaN(length)) {
+    document.getElementById("output").innerHTML = "<p>Invalid inputs detected!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  // Exception: invalid value of length
+  if (length < 0) {
+    document.getElementById("output").innerHTML = "<p>The length must be a non-positive number!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  // Exception: invalid range
+  if (lowerBound > upperBound) {
+    document.getElementById("output").innerHTML = "<p>The lower bound must not be greater than the upper bound!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+  
+  var series = [];
+  for (var i = 0; i < length; ++i) {
+    // Select a random number in range [lowerBound, upperBound]
+    series.push(Math.floor(Math.random() * (upperBound - lowerBound + 1)) + lowerBound);
+  }
+  
+  document.getElementById("output").innerHTML = "<p>Output:<br><br>[" + series.join(",") + "]</p>";
+  document.getElementById("copyButton").style.display = "block";
+  
+  document.getElementById("copyButton").setAttribute("output-text", "[" + series.join(",") + "]");
+}
+
+/**
+ * @brief Generate a randomized numerical array in integer type, with elements
+ *        listed in increasing/decreasing order. Each element in the array is
+ *        randomly selected from a given numerical range.
+ * @param lowerBound {number} the lower bound of the range
+ * @param upperBound {number} the upper bound of the range
+ * @param length {number} the length of the output array
+ * @param type {string} the monotonic type of the array, with 4 options: 
+ *        "non-decreasing", "non-increasing", "strictly increasing", and
+ *        "strictly decreasing"
+ */
+function generateMonotonicNumericalArray() {
+  var lowerBound = parseInt(document.getElementById("monotonic-numerical-array-lower-bound").value);
+  var upperBound = parseInt(document.getElementById("monotonic-numerical-array-upper-bound").value);
+  var length = parseInt(document.getElementById("monotonic-numerical-array-length").value);
+  var type = document.getElementById("monotonic-numerical-array-type").value;
+  
+  // Exception: NaN inputs
+  if (isNaN(lowerBound) || isNaN(upperBound) || isNaN(length)) {
+    document.getElementById("output").innerHTML = "<p>Invalid integers detected!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  // Exception: invalid value of length
+  if (length < 0) {
+    document.getElementById("output").innerHTML = "<p>The length must be a non-positive number!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  // Exception: invalid range
+  if (lowerBound > upperBound) {
+    document.getElementById("output").innerHTML = "<p>The lower bound must not be greater than the upper bound!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  var series = [];
+  if (type == "monotonic-numerical-array-type-non-decreasing"
+      || type == "monotonic-numerical-array-type-non-increasing") {
+    // Insert random numbers
+    for (var i = 0; i < length; ++i)
+      series.push(Math.floor(Math.random() * (upperBound - lowerBound + 1)) + lowerBound);
+    
+    if (type == "monotonic-numerical-array-type-non-decreasing") {
+      // Sort in ascending order
+      series.sort((a, b) => a - b);
+    } else if (type == "monotonic-numerical-array-type-non-increasing") {
+      // Sort in descending order
+      series.sort((a, b) => b - a);
+    }
+  } else if (type == "monotonic-numerical-array-type-strictly-increasing"
+      || type == "monotonic-numerical-array-type-strictly-decreasing") {
+    // Exception: not enough numbers for strictly monotonic series
+    if (upperBound - lowerBound + 1 < length) {
+      document.getElementById("output").innerHTML = "<p>Not enough numbers for strictly monotonic series.</p>";
+      document.getElementById("copyButton").style.display = "none";
+      return;
+    }
+    
+    // Construct a candidate pool for all numbers in [lowerBound, upperBound]
+    var candidates = [];
+    for (var i = lowerBound; i <= upperBound; ++i)
+      candidates.push(i);
+    
+    // Select a number randomly, and remove it from the pool
+    for (var i = 0; i < length; ++i) {
+      var index = Math.floor(Math.random() * candidates.length);
+      [candidates[index], candidates[candidates.length-1]] = [candidates[candidates.length-1], candidates[index]];
+      series.push(candidates.pop());
+    }
+    
+    if (type == "monotonic-numerical-array-type-strictly-increasing") {
+      // Sort in ascending order
+      series.sort((a, b) => a - b);
+    } else if (type == "monotonic-numerical-array-type-strictly-decreasing") {
+      // Sort in descending order
+      series.sort((a, b) => b - a);
+    }
+  }  
+  
+  document.getElementById("output").innerHTML = "<p>Output:<br><br>[" + series.join(",") + "]</p>";
+  document.getElementById("copyButton").style.display = "block";
+  
+  document.getElementById("copyButton").setAttribute("output-text", "[" + series.join(",") + "]");
+}
+
+/**
+ * @brief Generate a string of randomized characters. Each character is randomly
+ *        selected from the given range and type, such as uppercase and lowercase
+ *        letters, numbers, and other common symbols. 
+ */
+function generateRandomString() {
+  var candidates = "";
+
+  // Append uppercase-letter candidates
+  if (document.getElementById("string-uppercase").checked) {
+    var uppercase = appendUppercase();
+    if (uppercase == "") {
+      document.getElementById("output").innerHTML = "<p>Invalid format of uppercase letters!</p>";
+      document.getElementById("copyButton").style.display = "none";
+      return;
+    }
+    candidates += uppercase;
+  }
+
+  // Append lowercase-letter candidates
+  if (document.getElementById("string-lowercase").checked) {
+    var lowercase = appendLowercase();
+    if (lowercase == "") {
+      document.getElementById("output").innerHTML = "<p>Invalid format of lowercase letters!</p>";
+      document.getElementById("copyButton").style.display = "none";
+      return;
+    }
+    candidates += lowercase;
+  }
+
+  // Append number candidates
+  if (document.getElementById("string-number").checked) {
+    var number = appendNumber();
+    if (number == "") {
+      document.getElementById("output").innerHTML = "<p>Invalid format of numbers!</p>";
+      document.getElementById("copyButton").style.display = "none";
+      return;
+    }
+    candidates += number;
+  }
+
+  // Append symbol candidates
+  if (document.getElementById("string-symbol").checked) {
+    candidates += document.getElementById("string-symbol-input").value;
+  }
+
+  candidates = removeDuplicateCharacters(candidates);
+
+  // Exception: no selection of character types
+  if (candidates.length == 0) {
+    document.getElementById("output").innerHTML = "<p>No selection of character types! Please select at least one option.</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  var length = parseInt(document.getElementById("string-length").value);
+  // Exception: invalid value of length
+  if (isNaN(length) || length < 0) {
+    document.getElementById("output").innerHTML = "<p>Invalid value of length detected!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  var outputString = "";
+  for (var i = 0; i < length; ++i) {
+    outputString += candidates[Math.floor(Math.random() * candidates.length)];
+  }
+  
+  document.getElementById("output").innerHTML = "<p>Output:<br><br>\"" + outputString + "\"</p>";
+  document.getElementById("copyButton").style.display = "block";
+  
+  document.getElementById("copyButton").setAttribute("output-text", "\"" + outputString + "\"");
+}
+
+function appendUppercase() {
+  return appendCandidates(
+    "string-uppercase",
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    isUppercase
+  );
+}
+
+function appendLowercase() {
+  return appendCandidates(
+    "string-lowercase",
+    "abcdefghijklmnopqrstuvwxyz",
+    isLowercase
+  );
+}
+
+function appendNumber() {
+  return appendCandidates(
+    "string-number",
+    "0123456789",
+    isNumber
+  );
+}
+
+function appendCandidates(type, pool, isType) {
+  var range = document.getElementById(type + "-input").value;
+  var candidates = "";
+  switch (range.length) {
+    case 0:
+      // Format-1: Leave blank
+      candidates = pool;
+      break;
+    case 1:
+      // Format-2: X
+      // Exception: invalid format (mismatch characters)
+      if (!isType(range[0])) { return ""; }
+
+      candidates = range[0];
+      break;
+    case 2:
+      // Format-3: -X/X- and Format-4: XY/YX
+      // Exception: invalid format (mismatch characters)
+      if (!isType(range[0]) && !isType(range[1])) { return ""; }
+
+      if (range[0] == '-') {
+        // -X
+        var upperIndex = range[1].charCodeAt() - pool[0].charCodeAt();
+        candidates = pool.substring(0, upperIndex+1);
+      } else if (range[1] == '-') {
+        // X-
+        var lowerIndex = range[0].charCodeAt() - pool[0].charCodeAt();
+        candidates = pool.substring(lowerIndex);
+      } else {
+        // XY/YX
+        if (range[0] <= range[1]) {
+          candidates = pool.substring(
+            range[0].charCodeAt()-pool[0].charCodeAt(),
+            range[1].charCodeAt()-pool[0].charCodeAt()+1
+          );
+        } else {
+          candidates = pool.substring(
+            range[1].charCodeAt()-pool[0].charCodeAt(),
+            range[0].charCodeAt()-pool[0].charCodeAt()+1
+          );
+        }
+      }
+      break;
+    case 3:
+      // Format-4: X-Y or Y-X
+      // Exception: invalid format (irrelevant characters)
+      if (range[1] != '-') { return ""; }
+      // Exception: invalid format (mismatch characters)
+      if (!isType(range[0]) && !isType(range[2])) { return ""; }
+
+      if (range[0] <= range[2]) {
+        candidates = pool.substring(
+          range[0].charCodeAt()-pool[0].charCodeAt(),
+          range[2].charCodeAt()-pool[0].charCodeAt()+1
+        );
+      } else {
+        candidates = pool.substring(
+          range[2].charCodeAt()-pool[0].charCodeAt(),
+          range[0].charCodeAt()-pool[0].charCodeAt()+1
+        );
+      }
+      break;
+  }
+  return candidates;
+}
+
+const isUppercase = (ch) => ch >= 'A' && ch <= 'Z';
+const isLowercase = (ch) => ch >= 'a' && ch <= 'z';
+const isNumber = (ch) => ch >= '0' && ch <= '9';
+
+/**
+ * @brief Remove all duplicated characters in a string
+ */
+function removeDuplicateCharacters(str) {
+  // Convert string to an array, use Set to remove duplicates, then join back to a string
+  return [...new Set(str)].join('');
+}
+
+</script>
+
+</body>
+</html>
+    
