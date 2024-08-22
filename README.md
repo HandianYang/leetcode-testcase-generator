@@ -12,15 +12,13 @@ This repository is still under development! All available features can be checke
 
 Choose any method to download this repository:
 + Clone via HTTPS
-
     ```bash
-    git clone ...
+    git clone https://github.com/HandianYang/leetcode-testcase-generator.git
     ```
 
 + Clone via SSH
-
     ```bash
-    git clone ...
+    git clone git@github.com:HandianYang/leetcode-testcase-generator.git
     ```
 
 + Download ZIP
@@ -64,29 +62,29 @@ Choose any method to download this repository:
 
 #### 1. Numerical array
 
-##### Description
+##### :arrow_right: Description
 
 Generate a randomized numerical array in integer type. Each element in the array is randomly selected from a given numerical range.
 
-##### When to use?
+##### :arrow_right: When to use?
 
 Problems regarding (but not limited to) ...
 + 1D numerical array ([`Array`](https://leetcode.com/tag/array/))
 + linked-list ([`Linked List`](https://leetcode.com/tag/linked-list/), [`Doubly-Linked List`](https://leetcode.com/tag/doubly-linked-list/))
 
-##### When **NOT** to use?
+##### :arrow_right: When **NOT** to use?
 
 You should not use this function to generate test cases of ...
 + 1D **SORTED** array (use [Monotonic numerical array](#2-monotonic-numerical-array) instead)
 + binary tree (use "Normal binary tree" or other specific trees instead)
 
-##### Parameters
+##### :arrow_right: Parameters
 
 + **lower bound (int)**: The lower bound of the range. The number MAY NOT be included in the output array.
 + **upper bound (int)**: The upper bound of the range. The number MAY NOT be included in the output array.
 + **length (int)**: The length of the output array. 
 
-##### Constraints
+##### :arrow_right: Constraints
 
 1. Do not leave blank, or type any non-numerical symbols into any input field.
 2. **"length"** must be a non-negative number.
@@ -96,24 +94,24 @@ You should not use this function to generate test cases of ...
 
 #### 2. Monotonic numerical array
 
-##### Description
+##### :arrow_right: Description
 
 Generate a randomized numerical array in integer type, with elements **listed in increasing/decreasing order**. Each element in the array is randomly selected from a given numerical range.
 
-##### When to use?
+##### :arrow_right: When to use?
 
 Problems regarding (but not limited to) ...
 + 1D SORTED numerical array ([`Array`](https://leetcode.com/tag/array/), [`Sorting`](https://leetcode.com/tag/sorting/))
 + SORTED linked-list
 
-##### Parameters
+##### :arrow_right: Parameters
 
 + `lower bound (int)`: The lower bound of the range. The number MAY NOT be included in the output array.
 + `upper bound (int)`: The upper bound of the range. The number MAY NOT be included in the output array.
 + `length (int)`: The length of the output array. 
 + `type (option)`: The monotonic type of the array, with 4 options "non-decreasing", "non-increasing", "strictly increasing", and "strictly decreasing".
 
-##### Constraints
+##### :arrow_right: Constraints
 
 1. Do not leave blank, or type any non-numerical symbols into any input field.
 2. **"length"** must be a non-negative number.
@@ -128,11 +126,11 @@ Problems regarding (but not limited to) ...
 
 #### 1. Normal string
 
-##### Description
+##### :arrow_right: Description
 
 Generate a string of randomized characters. Each character is randomly selected from the given range and type, such as uppercase and lowercase letters, numbers, and other common symbols. 
 
-##### When to use?
+##### :arrow_right: When to use?
 
 Problems regarding (but not limited to) ...
 + string ([`String`](https://leetcode.com/tag/string/))
@@ -145,7 +143,7 @@ You should not use this function to generate test cases of ...
 + strings with words seperated by spaces
 -->
 
-##### Parameters
+##### :arrow_right: Parameters
 
 + `length (int)`: The length of the output string.
 + `type (option) & range (string)`: The character type that the output string MAY contain. Each option can be selected by checking the corresponding checkbox, and the range of covered characters can also be specified.
@@ -154,7 +152,7 @@ You should not use this function to generate test cases of ...
   - `number`: The character of digits, ranging from `0` to `9` (if not specified).
   - `other symbol`: Other common symbols to be specified, such as ` `(white space), `.`, `,`. However, you can type letters and digits as well (refer to [Input format](#input-format)).
 
-##### Input format
+##### :arrow_right: Input format
 
 The following inputs of `range` are acceptable:
 1. **Leave blank**: all characters of that type are covered.
@@ -229,7 +227,7 @@ The following explains the format of `other symbol`:
   [v] other symbols (13579)
   ```
 
-##### Constraints
+##### :arrow_right: Constraints
 
 1. Do not leave blank, or type any non-numerical symbols into the `length` field.
 2. `length` must be a non-negative number.
