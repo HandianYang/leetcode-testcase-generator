@@ -39,17 +39,18 @@ Choose any method to download this repository:
     2. [Monotonic numerical array](#2-monotonic-numerical-array)
     3. Character array
     4. String array
-  - Two-dimensional array
-    1. Numerical matrix
+  - [Two-dimensional array](#two-dimensional-array)
+    1. [Numerical matrix](#1-numerical-matrix)
     2. Character matrix
   - [Strings](#strings)
     1. [Normal String](#1-normal-string) 
     2. String with words seperated by spaces
 + Data Structures
   - Tree
-    1. Normal binary tree
+    1. Binary tree
     2. Balanced binary tree
     3. Binary search tree
+    4. N-ary tree
   - Graph
     1. Unweighted graph
     2. Weighted graph
@@ -69,8 +70,8 @@ Generate a randomized numerical array in integer type. Each element in the array
 ##### :arrow_right: When to use?
 
 Problems regarding (but not limited to) ...
-+ 1D numerical array ([`Array`](https://leetcode.com/tag/array/))
-+ linked-list ([`Linked List`](https://leetcode.com/tag/linked-list/), [`Doubly-Linked List`](https://leetcode.com/tag/doubly-linked-list/))
++ 1D numerical array ([`Array`](https://leetcode.com/problem-list/array/))
++ linked-list ([`Linked List`](https://leetcode.com/problem-list/linked-list/), [`Doubly-Linked List`](https://leetcode.com/problem-list/doubly-linked-list/))
 
 ##### :arrow_right: When **NOT** to use?
 
@@ -80,15 +81,15 @@ You should not use this function to generate test cases of ...
 
 ##### :arrow_right: Parameters
 
-+ **lower bound (int)**: The lower bound of the range. The number MAY NOT be included in the output array.
-+ **upper bound (int)**: The upper bound of the range. The number MAY NOT be included in the output array.
-+ **length (int)**: The length of the output array. 
++ `lowerBound (int)`: The lower bound of the range. The number MAY NOT be included in the output array.
++ `upperBound (int)`: The upper bound of the range. The number MAY NOT be included in the output array.
++ `length (int)`: The length of the output array. 
 
 ##### :arrow_right: Constraints
 
 1. Do not leave blank, or type any non-numerical symbols into any input field.
-2. **"length"** must be a non-negative number.
-3. **"lower bound"** must not be greater than **"upper bound"**.
+2. `length` must be a non-negative number.
+3. `lowerBound` must not be greater than `upperBound`.
 
 <!-- ---------------------------------------------------------------------- -->
 
@@ -101,26 +102,50 @@ Generate a randomized numerical array in integer type, with elements **listed in
 ##### :arrow_right: When to use?
 
 Problems regarding (but not limited to) ...
-+ 1D SORTED numerical array ([`Array`](https://leetcode.com/tag/array/), [`Sorting`](https://leetcode.com/tag/sorting/))
++ 1D SORTED numerical array ([`Array`](https://leetcode.com/problem-list/array/), [`Sorting`](https://leetcode.com/problem-list/sorting/))
 + SORTED linked-list
 
 ##### :arrow_right: Parameters
 
-+ `lower bound (int)`: The lower bound of the range. The number MAY NOT be included in the output array.
-+ `upper bound (int)`: The upper bound of the range. The number MAY NOT be included in the output array.
++ `lowerBound (int)`: The lower bound of the range. The number MAY NOT be included in the output array.
++ `upperBound (int)`: The upper bound of the range. The number MAY NOT be included in the output array.
 + `length (int)`: The length of the output array. 
 + `type (option)`: The monotonic type of the array, with 4 options "non-decreasing", "non-increasing", "strictly increasing", and "strictly decreasing".
 
 ##### :arrow_right: Constraints
 
 1. Do not leave blank, or type any non-numerical symbols into any input field.
-2. **"length"** must be a non-negative number.
-3. **"lower bound"** must not be greater than **"upper bound"**.
-4. For strictly monotonic series, the length of [lowerbound, upperbound] must not be smaller than the length of the array.
+2. `length` must be a non-negative number.
+3. `lowerBound` must not be greater than `upperBound`.
+4. For strictly monotonic series, the length of `[lowerbound, upperbound]` must not be smaller than the length of the array.
 
 <!-- ---------------------------------------------------------------------- -->
 
 ### Two-dimensional array
+
+#### 1. Numerical matrix
+
+##### :arrow_right: Description
+
+Generate a randomized numerical matrix (i.e. 2D array) in integer type. Each element in the matrix is randomly selected from a given numerical range.
+
+##### :arrow_right: When to use?
+
+Problems regarding (but not limited to) ...
++ matrix ([`Matrix`](https://leetcode.com/problem-list/matrix/))
+
+##### :arrow_right: Parameters
+
++ `lowerBound (int)`: The lower bound of the range. The number MAY NOT be included in the output matrix.
++ `upperBound (int)`: The upper bound of the range. The number MAY NOT be included in the output matrix.
++ `row (int)`: The number of rows of the output matrix. 
++ `col (int)`: The number of columns of the output matrix. 
+
+##### :arrow_right: Constraints
+
+1. Do not leave blank, or type any non-numerical symbols into any input field.
+2. `row` and `col` must be non-negative numbers.
+3. `lowerBound` must not be greater than `upperBound`.
 
 ### Strings
 
@@ -133,8 +158,8 @@ Generate a string of randomized characters. Each character is randomly selected 
 ##### :arrow_right: When to use?
 
 Problems regarding (but not limited to) ...
-+ string ([`String`](https://leetcode.com/tag/string/))
-+ trie ([`Trie`](https://leetcode.com/tag/trie/))
++ string ([`String`](https://leetcode.com/problem-list/string/))
++ trie ([`Trie`](https://leetcode.com/problem-list/trie/))
 
 <!-- 
 ##### When NOT to use?

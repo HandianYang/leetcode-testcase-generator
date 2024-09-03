@@ -67,6 +67,7 @@
   <li class="tab active" onclick="showTab('numerical-array-tab')">Numerical array</li>
   <li class="tab" onclick="showTab('monotonic-numerical-array-tab')">Monotonic numerical array</li>
   <li class="tab" onclick="showTab('string-tab')">String</li>
+  <li class="tab" onclick="showTab('numerical-matrix-tab')">Numerical matrix</li>
 </ul>
     
 <div id="numerical-array-tab" class="tab-content active">
@@ -117,6 +118,30 @@
 
     <br><br>
     <button type="button" onclick="generateMonotonicNumericalArray()">Generate</button>
+  </form>
+</div>
+
+<div id="numerical-matrix-tab" class="tab-content">
+  <h2>Numerical matrix</h2>
+  <p>
+    Generate a randomized numerical matrix (i.e. 2D array) in integer type. 
+    Each element in the matrix is randomly selected from a given numerical range.
+  </p>
+  <form id="numerical-matrix-form">
+    <label for="numerical-matrix-lower-bound">Enter the lower bound:</label><br>
+    <input type="number" id="numerical-matrix-lower-bound"
+           name="numerical-matrix-lower-bound" value="0" required><br><br>
+    <label for="numerical-matrix-upper-bound">Enter the upper bound:</label><br>
+    <input type="number" id="numerical-matrix-upper-bound"
+           name="numerical-matrix-upper-bound" value="10" required><br><br>
+    <label for="numerical-matrix-row">Enter the number of rows:</label><br>
+    <input type="number" id="numerical-matrix-row" 
+           name="numerical-matrix-row" value="3" required><br><br>
+    <label for="numerical-matrix-col">Enter the number of columns:</label><br>
+    <input type="number" id="numerical-matrix-col" 
+           name="numerical-matrix-col" value="3" required><br><br>
+
+    <button type="button" onclick="generateNumericalMatrix()">Generate</button>
   </form>
 </div>
 
@@ -390,6 +415,57 @@ function generateMonotonicNumericalArray() {
 }
 
 /**
+ * @brief Generate a randomized numerical matrix (i.e. 2D array) in integer type.
+ *       Each element in the matrix is randomly selected from a given numerical range.
+ * @param lowerBound {number} the lower bound of the range
+ * @param upperBound {number} the upper bound of the range
+ * @param row {number} the number of rows in the matrix
+ * @param col {number} the number of columns in the matrix
+ */
+ function generateNumericalMatrix() {
+  var lowerBound = parseInt(document.getElementById("numerical-matrix-lower-bound").value);
+  var upperBound = parseInt(document.getElementById("numerical-matrix-upper-bound").value);
+  var row = parseInt(document.getElementById("numerical-matrix-row").value);
+  var col = parseInt(document.getElementById("numerical-matrix-col").value);
+  
+  // Exception: NaN inputs
+  if (isNaN(lowerBound) || isNaN(upperBound) || isNaN(row) || isNaN(col)) {
+    document.getElementById("output").innerHTML = "<p>Invalid integers detected!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  // Exception: invalid value of row or column
+  if (row < 0 || col < 0) {
+    document.getElementById("output").innerHTML = "<p>The number of rows and columns must be non-negative!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+
+  // Exception: invalid range
+  if (lowerBound > upperBound) {
+    document.getElementById("output").innerHTML = "<p>The lower bound must not be greater than the upper bound!</p>";
+    document.getElementById("copyButton").style.display = "none";
+    return;
+  }
+  
+  var matrix = [];
+  for (var i = 0; i < row; ++i) {
+    var series = [];
+    for (var j = 0; j < col; ++j) {
+      // Select a random number in range [lowerBound, upperBound]
+      series.push(Math.floor(Math.random() * (upperBound - lowerBound + 1)) + lowerBound);
+    }
+    matrix.push(series);
+  }
+  
+  document.getElementById("output").innerHTML = "<p>Output:<br><br>[" + matrix.map(row => "[" + row.join(",") + "]").join(",<br>") + "]</p>";
+  document.getElementById("copyButton").style.display = "block";
+  
+  document.getElementById("copyButton").setAttribute("output-text", "[" + matrix.map(row => "[" + row.join(",") + "]").join(",") + "]");
+}
+
+/**
  * @brief Generate a string of randomized characters. Each character is randomly
  *        selected from the given range and type, such as uppercase and lowercase
  *        letters, numbers, and other common symbols. 
@@ -556,6 +632,7 @@ function appendCandidates(type, pool, isType) {
 const isUppercase = (ch) => ch >= 'A' && ch <= 'Z';
 const isLowercase = (ch) => ch >= 'a' && ch <= 'z';
 const isNumber = (ch) => ch >= '0' && ch <= '9';
+
 
 /**
  * @brief Remove all duplicated characters in a string
